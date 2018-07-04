@@ -26,6 +26,7 @@ Plug 'prettier/vim-prettier', {
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 " Plug 'terryma/vim-multiple-cursors'
 Plug 'ternjs/tern_for_vim'
@@ -33,10 +34,11 @@ Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'szw/vim-maximizer'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 
 " Color settings
-colorscheme vim-material
+"colorscheme vim-material
 highlight ColorColumn guibg=#4f525b
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -217,3 +219,10 @@ let g:livedown_port = 1337
 " the browser to use
 let g:livedown_browser = "safari"
 "silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
+"Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
