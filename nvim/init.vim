@@ -9,6 +9,8 @@ Plug 'jason0x43/vim-js-indent'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'leafgarland/typescript-vim'
 Plug 'hzchirs/vim-material'
+Plug 'iCyMind/NeoSolarized' 
+"Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -38,7 +40,10 @@ Plug 'junegunn/vim-easy-align'
 call plug#end()
 
 " Color settings
-"colorscheme vim-material
+colorscheme NeoSolarized
+set termguicolors
+set background=dark
+
 highlight ColorColumn guibg=#4f525b
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -145,7 +150,7 @@ let g:deoplete#enable_at_startup = 1
 let g:javascript_plugin_jsdoc = 1
 
 " vim-surround mappings
-let g:surround_no_mappings = 1
+let g:surround_no_mappings                 = 1
 nmap <leader>ds  <Plug>Dsurround
 nmap <leader>cs  <Plug>Csurround
 nmap <leader>ys  <Plug>Ysurround
@@ -153,7 +158,7 @@ nmap <leader>yS  <Plug>YSurround
 nmap <leader>yss <Plug>Yssurround
 nmap <leader>ySs <Plug>YSsurround
 nmap <leader>ySS <Plug>YSSurround
-xmap <leader>vs   <Plug>VSurround
+xmap <leader>s   <Plug>VSurround
 xmap <leader>gS  <Plug>VgSurround
 if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
   imap    <C-S> <Plug>Isurround
