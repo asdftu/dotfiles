@@ -1,42 +1,84 @@
 call plug#begin()
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'shime/vim-livedown'
  " For async completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'pangloss/vim-javascript'
-Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'leafgarland/typescript-vim'
-Plug 'hzchirs/vim-material'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+"Plug 'hzchirs/vim-material'
 Plug 'iCyMind/NeoSolarized' 
 "Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+Plug 'Shougo/echodoc.vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'janko-m/vim-test'
 Plug 'terryma/vim-expand-region'
 Plug 'sbdchd/neoformat'
-Plug 'prettier/vim-prettier', {
-      \ 'do': 'yarn install',
-      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-fugitive'
-" Plug 'terryma/vim-multiple-cursors'
-Plug 'ternjs/tern_for_vim'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'szw/vim-maximizer'
 Plug 'junegunn/vim-easy-align'
+
+
+" autocompletion
+Plug 'ncm2/ncm2'
+" ncm2 requires nvim-yarp
+Plug 'roxma/nvim-yarp'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+
+" Utils
+Plug 'honza/vim-snippets' " snippet library
+Plug 'SirVer/ultisnips' " snippet manager
+
+" git support
+Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
+Plug 'airblade/vim-gitgutter' " gitstatus in the gutter column
+Plug 'junegunn/gv.vim' " extension for fugitive to show log --graph
+
+" code format
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+
+" html / templates
+Plug 'mattn/emmet-vim', { 'for': [ 'html', 'javascript', 'javascript.jsx', 'typoscript' ] } " emmet support for vim - easily create markdup wth CSS-like syntax
+Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
+Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }  " mustach support
+Plug 'juvenn/mustache.vim', { 'for': 'mustache' } " mustache support
+
+" JavaScript
+"Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' } " autocompletion and refactoring 
+Plug 'pangloss/vim-javascript', { 'for': [ 'javascript.jsx', 'javascript'  ]} " javascript syntax support
+Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] } " JSX support
+Plug 'heavenshell/vim-jsdoc', { 'for': [ 'javascript.jsx', 'javascript' ] }
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-js-pretty-template'
+
+" Typescirpt
+Plug 'leafgarland/typescript-vim'
+
+
+" styles
+"Plug 'calebeby/ncm-css' " completion for css/scss/sass
+Plug 'groenewege/vim-less', { 'for': 'less' } " less support
+Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
+Plug 'stephenway/postcss.vim', { 'for': [ 'css', 'scss', 'less', 'stylus' ] } " postcss syntax highlight
+
+"markdown
+Plug 'shime/vim-livedown'
+
 call plug#end()
 
 " Color settings
@@ -57,14 +99,23 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
-
-" supress other completion
+" enable ncm2 for all buffer
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" note that must keep noinsert in completeopt, the others is optional
+set completeopt=noinsert,menuone,noselect
 set shortmess+=c
-
 " General settings
-set tabstop=2
-set shiftwidth=2
-set expandtab
+" make backspace behave in a sane manner
+set backspace=indent,eol,start
+
+" Tab control
+set expandtab               " insert spaces rather than tabsfor <Tab>
+set smarttab                " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4               " the visible width of tabs
+set softtabstop=4           " edit as if the tabs are 4 characters wide
+set shiftwidth=4            " number of spaces to use for indent and unindent
+set shiftround              " round indent to a multiple of 'shiftwidth'
+
 set clipboard=unnamedplus
 let base16colorspace=256
 set termguicolors
@@ -83,7 +134,7 @@ set cursorcolumn
 set autoread
 au CursorHold * checktime  
 
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 "noremap gV `[v`]
 
@@ -142,11 +193,10 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 map <leader>e <Plug>(expand_region_expand)
 map <leader>, <Plug>(expand_region_shrink)
 
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : deoplete#manual_complete()
+"inoremap <silent><expr> <Tab>
+      "\ pumvisible() ? "\<C-n>" : deoplete#manual_complete()
 
 "let g:typescript_indent_disable = 1
-let g:deoplete#enable_at_startup = 1
 let g:javascript_plugin_jsdoc = 1
 
 " vim-surround mappings
@@ -177,6 +227,7 @@ vnoremap <silent><F3> :MaximizerToggle<CR>gv
 inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 
 let g:LanguageClient_autoStart = 1
+set signcolumn=yes
 
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -188,15 +239,15 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 set hidden
 
 " Use an absolute configuration path if you want system-wide settings 
-let g:LanguageClient_loadSettings = 1 
-let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
+"let g:LanguageClient_loadSettings = 1 
+"let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " LanguageClient settings
 let g:LanguageClient_serverCommands = {
-      \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-      \ 'typescript': ['tcp://127.0.0.1:2089'],
-      \ 'javascript': ['tcp://127.0.0.1:2089'],
+      \ 'javascript.jsx': ['javascript-typescript-stdio'],
+      \ 'typescript': ['javascript-typescript-stdio'],
+      \ 'javascript': ['javascript-typescript-stdio'],
       \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
       \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
       \ 'python': ['pyls'],
@@ -226,3 +277,56 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+
+" Fugitive
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <leader>ge :Gedit<cr>
+nmap <silent><leader>gr :Gread<cr>
+nmap <silent><leader>gb :Gblame<cr>
+
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric//YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical" " UltiSnipsEdit to split your window.
+
+" lookup
+autocmd FileType javascript* nnoremap <leader>rlr :TernRefs<cr>
+autocmd FileType javascript* nnoremap <leader>rld :TernDoc<cr>
+
+" rename
+autocmd FileType javascript* nnoremap <leader>rrr :TernRename<cr>
+
+" go to definition of a method / class / whatever via Ctags
+autocmd FileType javascript* map <leader>] :TernDef<CR>
+
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" wrap existing omnifunc
+" Note that omnifunc does not run in background and may probably block the
+" editor. If you don't want to be blocked by omnifunc too often, you could
+" add 180ms delay before the omni wrapper:
+"  'on_complete': ['ncm2#on_complete#delay', 180,
+"               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+au User Ncm2Plugin call ncm2#register_source({
+        \ 'name' : 'css',
+        \ 'priority': 9, 
+        \ 'subscope_enable': 1,
+        \ 'scope': ['css','scss'],
+        \ 'mark': 'css',
+        \ 'word_pattern': '[\w\-]+',
+        \ 'complete_pattern': ':\s*',
+        \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+        \ })
