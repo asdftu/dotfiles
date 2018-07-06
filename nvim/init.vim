@@ -178,34 +178,29 @@ inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 
 let g:LanguageClient_autoStart = 1
 
-" <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
-      \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
-      \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
-      \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-autocmd FileType javascript nnoremap <buffer>
-      \ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
-
+nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Required for operations modifying multiple buffers like rename.
 set hidden
-"      \ 'javascript': ['javascript-typescript-stdio'],
-"      \ 'typescript': ['javascript-typescript-stdio'],
 
+" Use an absolute configuration path if you want system-wide settings 
+let g:LanguageClient_loadSettings = 1 
+let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " LanguageClient settings
 let g:LanguageClient_serverCommands = {
       \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
       \ 'typescript': ['tcp://127.0.0.1:2089'],
       \ 'javascript': ['tcp://127.0.0.1:2089'],
+      \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+      \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
       \ 'python': ['pyls'],
       \ }
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " ALE settings
 let g:ale_linters = {
