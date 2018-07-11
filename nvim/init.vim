@@ -25,11 +25,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'raimondi/delimitmate'
 Plug 'simnalamburt/vim-mundo'
 Plug 'yggdroot/indentline'
+Plug 'tpope/vim-commentary'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-abolish'
+Plug 'AndrewRadev/splitjoin.vim'
+
 
 " autocompletion
-Plug 'ncm2/ncm2'
-" ncm2 requires nvim-yarp
-Plug 'roxma/nvim-yarp'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -59,6 +63,7 @@ Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to p
 Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }  " mustach support
 Plug 'juvenn/mustache.vim', { 'for': 'mustache' } " mustache support
+Plug 'vim-scripts/matchit.zip'
 
 " JavaScript
 "Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
@@ -74,7 +79,6 @@ Plug 'leafgarland/typescript-vim'
 
 
 " styles
-"Plug 'calebeby/ncm-css' " completion for css/scss/sass
 Plug 'groenewege/vim-less', { 'for': 'less' } " less support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
@@ -87,6 +91,11 @@ Plug 'shime/vim-livedown'
 "JSON
 Plug 'elzr/vim-json'
 
+
+"Python
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
 
 call plug#end()
 
@@ -108,12 +117,6 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
-" enable ncm2 for all buffer
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completefunc=LanguageClient#complete
-" note that must keep noinsert in completeopt, the others is optional
-set completeopt=noinsert,menuone,noselect
-"set shortmess+=c
 " General settings
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
@@ -164,6 +167,7 @@ map <C-g> :GitFiles<CR>
 map <Leader>t :BTags<CR>
 map <Leader>a :Ag<CR>
 map <Leader>d :NERDTreeToggle<CR>
+map <Leader>dd :NERDTreeToggle<CR>:NERDTreeToggle<CR>
 map <leader>pa :PrettierAsync<CR>
 
 nnoremap k gk
@@ -324,23 +328,6 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" wrap existing omnifunc
-" Note that omnifunc does not run in background and may probably block the
-" editor. If you don't want to be blocked by omnifunc too often, you could
-" add 180ms delay before the omni wrapper:
-"  'on_complete': ['ncm2#on_complete#delay', 180,
-"               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-au User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'css',
-        \ 'priority': 9, 
-        \ 'subscope_enable': 1,
-        \ 'scope': ['css','scss'],
-        \ 'mark': 'css',
-        \ 'word_pattern': '[\w\-]+',
-        \ 'complete_pattern': ':\s*',
-        \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-        \ })
 
 
 "easy motion
