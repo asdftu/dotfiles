@@ -1,14 +1,13 @@
 call plug#begin()
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'jistr/vim-nerdtree-tabs'
+Plug 'fholgado/minibufexpl.vim'
  " For async completion
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 "Plug 'hzchirs/vim-material'
 Plug 'iCyMind/NeoSolarized' 
 "Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/echodoc.vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,7 +21,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'szw/vim-maximizer'
 Plug 'junegunn/vim-easy-align'
-
+Plug 'easymotion/vim-easymotion'
+Plug 'raimondi/delimitmate'
+Plug 'simnalamburt/vim-mundo'
+Plug 'yggdroot/indentline'
 
 " autocompletion
 Plug 'ncm2/ncm2'
@@ -42,6 +44,9 @@ Plug 'SirVer/ultisnips' " snippet manager
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'airblade/vim-gitgutter' " gitstatus in the gutter column
 Plug 'junegunn/gv.vim' " extension for fugitive to show log --graph
+
+" cpp
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " code format
 Plug 'prettier/vim-prettier', {
@@ -79,6 +84,10 @@ Plug 'stephenway/postcss.vim', { 'for': [ 'css', 'scss', 'less', 'stylus' ] } " 
 "markdown
 Plug 'shime/vim-livedown'
 
+"JSON
+Plug 'elzr/vim-json'
+
+
 call plug#end()
 
 " Color settings
@@ -101,9 +110,10 @@ let NERDTreeAutoDeleteBuffer=1
 
 " enable ncm2 for all buffer
 autocmd BufEnter * call ncm2#enable_for_buffer()
+set completefunc=LanguageClient#complete
 " note that must keep noinsert in completeopt, the others is optional
 set completeopt=noinsert,menuone,noselect
-set shortmess+=c
+"set shortmess+=c
 " General settings
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
@@ -141,30 +151,28 @@ au CursorHold * checktime
 " Key mappings
 let mapleader = "\<Space>"
 map <leader>w <C-W>
-map <leader>s <C-W><C-W>
 
 
 " Map C-s to save the file
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
-map <C-p> :FZF<CR>
+map <leader>pp :FZF<CR>
 map <C-l> :BLines<CR>
 map <C-tab> :Buffers<CR>
 map <C-g> :GitFiles<CR>
 map <Leader>t :BTags<CR>
 map <Leader>a :Ag<CR>
 map <Leader>d :NERDTreeToggle<CR>
-map <Leader>dd :NERDTreeToggle<CR>:NERDTreeToggle<CR>
-map <leader>p :PrettierAsync<CR>
+map <leader>pa :PrettierAsync<CR>
 
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
 nnoremap gj j 
 
-noremap <Leader>n nzz
-noremap <Leader>N Nzz
+"noremap <Leader>n nzz
+"noremap <Leader>N Nzz
 
 autocmd FileType javascript :JsPreTmpl html
 autocmd FileType typescript :JsPreTmpl html
@@ -291,6 +299,10 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical" " UltiSnipsEdit to split your window.
 
+" mini buffer display
+nmap <leader>b :MBEToggle<cr>
+
+
 " lookup
 autocmd FileType javascript* nnoremap <leader>rlr :TernRefs<cr>
 autocmd FileType javascript* nnoremap <leader>rld :TernDoc<cr>
@@ -300,7 +312,6 @@ autocmd FileType javascript* nnoremap <leader>rrr :TernRename<cr>
 
 " go to definition of a method / class / whatever via Ctags
 autocmd FileType javascript* map <leader>] :TernDef<CR>
-
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
@@ -330,3 +341,42 @@ au User Ncm2Plugin call ncm2#register_source({
         \ 'complete_pattern': ':\s*',
         \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
         \ })
+
+
+"easy motion
+" <Leader>f{char} to move to {char}
+map  <Leader>gf <Plug>(easymotion-bd-f)
+nmap <Leader>gf <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>gl <Plug>(easymotion-bd-jk)
+nmap <Leader>gl <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>gw <Plug>(easymotion-bd-w)
+nmap <Leader>gw <Plug>(easymotion-overwin-w)
+
+" gundo
+nnoremap <Leader>un :mundotoggle<cr>
+let g:gundo_width = 60
+let g:gundo_preview_height = 40
+let g:gundo_right = 1
+set undofile
+set undodir=~/.config/nvim/undo
+
+
+"JSON setting
+au! BufRead,BufNewFile *.json set filetype=json
+
+augroup json_autocmd
+  autocmd!
+  autocmd FileType json set autoindent
+  autocmd FileType json set formatoptions=tcq2l
+  autocmd FileType json set textwidth=78 shiftwidth=2
+  autocmd FileType json set softtabstop=2 tabstop=8
+  autocmd FileType json set expandtab
+  autocmd FileType json set foldmethod=syntax
+augroup END
