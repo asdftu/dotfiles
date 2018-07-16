@@ -119,7 +119,6 @@ Plug 'shime/vim-livedown'
 Plug 'elzr/vim-json'
 
 "ActionScript
-Plug 'vim-scripts/actionscript.vim'
 Plug 'cespare/mxml.vim'
 
 "Python
