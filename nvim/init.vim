@@ -1,10 +1,9 @@
 call plug#begin()
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"Plug 'jistr/vim-nerdtree-tabs'
-Plug 'fholgado/minibufexpl.vim'
+" schemes
+Plug 'morhetz/gruvbox'
  " For async completion
 "Plug 'hzchirs/vim-material'
-Plug 'iCyMind/NeoSolarized' 
+"Plug 'iCyMind/NeoSolarized' 
 "Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -12,24 +11,56 @@ Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'janko-m/vim-test'
-Plug 'terryma/vim-expand-region'
 Plug 'sbdchd/neoformat'
-Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'szw/vim-maximizer'
-Plug 'junegunn/vim-easy-align'
-Plug 'easymotion/vim-easymotion'
 Plug 'raimondi/delimitmate'
-Plug 'simnalamburt/vim-mundo'
 Plug 'yggdroot/indentline'
-Plug 'tpope/vim-commentary'
 Plug 'yuttie/comfortable-motion.vim'
-Plug 'tpope/vim-abolish'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'kshenoy/vim-signature'
 
+
+" project 
+Plug 'wincent/ferret'
+Plug 'mhinz/vim-startify' " fancy startscreen
+"Plug 'jistr/vim-nerdtree-tabs'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
+Plug 'eshion/vim-sync' " filesync to remote or local directory
+Plug 'embear/vim-localvimrc' " enable .lvimrc support in projects
+Plug 'editorconfig/editorconfig-vim' " activates recognition of .editorconfig in projects
+Plug 'mileszs/ack.vim'
+
+"utilities
+Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
+Plug 'honza/vim-snippets' " snippet library
+Plug 'SirVer/ultisnips' " snippet manager
+Plug 'joonty/vdebug', { 'for': [ 'php', 'javascript', 'javascript.jsx' ] } " dpkg debugger 
+Plug 'vim-scripts/YankRing.vim' " easy yank/paste navigation
+Plug 'moll/vim-bbye' " keep window layout on Bdelete/Bwipeout
+
+" additional commands/textobjects
+Plug 'mbbill/undotree' " visualize undo branches
+Plug 'simnalamburt/vim-mundo'
+Plug 'nelstrom/vim-visual-star-search' " enables * search on visual selection
+Plug 'tpope/vim-commentary' " comment stuff out
+Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
+Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
+Plug 'tpope/vim-unimpaired' " mappings for easier usage of common actions like next, previous or line switching
+Plug 'tpope/vim-abolish' " magic substition
+Plug 'junegunn/vim-easy-align' " alignment 
+Plug 'vim-scripts/matchit.zip' " extended % matching
+Plug 'szw/vim-maximizer' "maximizes a window and resizes it back again
+Plug 'christoomey/vim-tmux-navigator' " integrate vim with tmux navigation
+Plug 'cohama/lexima.vim' " autmatic closing of quotes, paranehesis, brackets, ...
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-expand-region'
+Plug 'jiangmiao/auto-pairs'
+
+
+"tagbar
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_ctags_tagfile = '.tags'
 
 " autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -40,9 +71,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 
 
-" Utils
-Plug 'honza/vim-snippets' " snippet library
-Plug 'SirVer/ultisnips' " snippet manager
 
 " git support
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
@@ -67,7 +95,7 @@ Plug 'vim-scripts/matchit.zip'
 
 " JavaScript
 "Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' } " autocompletion and refactoring 
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' } " autocompletion and refactoring 
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript.jsx', 'javascript'  ]} " javascript syntax support
 Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] } " JSX support
 Plug 'heavenshell/vim-jsdoc', { 'for': [ 'javascript.jsx', 'javascript' ] }
@@ -76,7 +104,6 @@ Plug 'Quramy/vim-js-pretty-template'
 
 " Typescirpt
 Plug 'leafgarland/typescript-vim'
-
 
 " styles
 Plug 'groenewege/vim-less', { 'for': 'less' } " less support
@@ -91,6 +118,9 @@ Plug 'shime/vim-livedown'
 "JSON
 Plug 'elzr/vim-json'
 
+"ActionScript
+Plug 'vim-scripts/actionscript.vim'
+Plug 'cespare/mxml.vim'
 
 "Python
 Plug 'michaeljsmith/vim-indent-object'
@@ -100,48 +130,29 @@ Plug 'zchee/deoplete-jedi'
 call plug#end()
 
 " Color settings
-colorscheme NeoSolarized
-set termguicolors
-set background=dark
+"colorscheme NeoSolarized
+"set termguicolors
+"set background=dark
 
 highlight ColorColumn guibg=#4f525b
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+let g:airline_powerline_fonts=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tagbar#enabled = 0 " enable airline tabline
+let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
+let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
+let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
+let g:airline#extensions#tabline#show_splits = 0
 
 "--nerdtree options--
-let g:miniBufExplorerMoreThanOne = 0
+"let g:miniBufExplorerMoreThanOne = 1
 let NERDTreeWinSize=30
-"let NERDTreeWinPos="right"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
-" General settings
-" make backspace behave in a sane manner
-set backspace=indent,eol,start
-
-" Tab control
-set expandtab               " insert spaces rather than tabsfor <Tab>
-set smarttab                " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-set tabstop=4               " the visible width of tabs
-set softtabstop=4           " edit as if the tabs are 4 characters wide
-set shiftwidth=4            " number of spaces to use for indent and unindent
-set shiftround              " round indent to a multiple of 'shiftwidth'
-
-set clipboard=unnamedplus
-let base16colorspace=256
-set termguicolors
-set relativenumber
-set colorcolumn=80
-set ignorecase
-set smartcase
-set splitright
-set hidden
-set mouse=a
-
-set cursorline  
-set cursorcolumn
+source ~/.config/nvim/ui.vimrc
 
 " Automatically read a file when changed on the disk 
 set autoread
@@ -159,7 +170,7 @@ map <leader>w <C-W>
 " Map C-s to save the file
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR><esc>
 map <leader>pp :FZF<CR>
 map <C-l> :BLines<CR>
 map <C-tab> :Buffers<CR>
@@ -307,16 +318,6 @@ let g:UltiSnipsEditSplit="vertical" " UltiSnipsEdit to split your window.
 nmap <leader>b :MBEToggle<cr>
 
 
-" lookup
-autocmd FileType javascript* nnoremap <leader>rlr :TernRefs<cr>
-autocmd FileType javascript* nnoremap <leader>rld :TernDoc<cr>
-
-" rename
-autocmd FileType javascript* nnoremap <leader>rrr :TernRename<cr>
-
-" go to definition of a method / class / whatever via Ctags
-autocmd FileType javascript* map <leader>] :TernDef<CR>
-
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
@@ -336,7 +337,7 @@ map  <Leader>gf <Plug>(easymotion-bd-f)
 nmap <Leader>gf <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+nmap ss <Plug>(easymotion-overwin-f2)
 
 " Move to line
 map <Leader>gl <Plug>(easymotion-bd-jk)
@@ -367,3 +368,50 @@ augroup json_autocmd
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
 augroup END
+
+"--tagbar options--
+let g:tagbar_autoclose = 1
+nmap <silent> <leader>bl :TagbarOpen<CR>
+" gutentags
+
+let g:tagbar_type_typescript = {                                                  
+  \ 'ctagsbin' : 'tstags',                                                        
+  \ 'ctagsargs' : '-f-',                                                           
+  \ 'kinds': [                                                                     
+    \ 'e:enums:0:1',                                                               
+    \ 'f:function:0:1',                                                            
+    \ 't:typealias:0:1',                                                           
+    \ 'M:Module:0:1',                                                              
+    \ 'I:import:0:1',                                                              
+    \ 'i:interface:0:1',                                                           
+    \ 'C:class:0:1',                                                               
+    \ 'm:method:0:1',                                                              
+    \ 'p:property:0:1',                                                            
+    \ 'v:variable:0:1',                                                            
+    \ 'c:const:0:1',                                                              
+  \ ],                                                                            
+  \ 'sort' : 0                                                                    
+\ }                                                                               
+
+let g:tagbar_type_Css = {
+\ 'ctagstype' : 'css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+    \ }
+
+fun! ShowFuncName()
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bWn'))
+  ou
+  echohl None
+endfun
+map sf :call ShowFuncName() <CR>
+
+let g:vdebug_options = { 'server': '127.0.0.1', 'port': '9000' }
+
+" actionscript
+au BufNewFile,BufRead *.mxml set filetype=mxml
+au BufNewFile,BufRead *.as set filetype=actionscript
