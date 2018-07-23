@@ -175,7 +175,9 @@ map <C-l> :BLines<CR>
 map <C-tab> :Buffers<CR>
 map <C-g> :GitFiles<CR>
 map <Leader>t :BTags<CR>
-map <Leader>a :Ag<CR>
+map <Leader>a :Ag <C-R><C-W><CR>
+map <Leader>/ /<C-R><C-W><CR>
+
 map <Leader>d :NERDTreeToggle<CR>
 map <Leader>dd :NERDTreeToggle<CR>:NERDTreeToggle<CR>
 map <leader>pa :PrettierAsync<CR>
