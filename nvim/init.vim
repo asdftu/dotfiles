@@ -23,7 +23,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'wincent/ferret'
 Plug 'mhinz/vim-startify' " fancy startscreen
 "Plug 'jistr/vim-nerdtree-tabs'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
 Plug 'eshion/vim-sync' " filesync to remote or local directory
 Plug 'embear/vim-localvimrc' " enable .lvimrc support in projects
@@ -143,6 +142,7 @@ let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
 let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
 let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
 let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tagbar#flags = 'f'  " show full tag hierarchy
 
 "--nerdtree options--
 "let g:miniBufExplorerMoreThanOne = 1
@@ -165,18 +165,23 @@ au CursorHold * checktime
 let mapleader = "\<Space>"
 map <leader>w <C-W>
 
+nnoremap <esc> :noh<return><esc>
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <C-c> <ESC>
+
+map <leader>v ciw<C-r>0<ESC>
 
 " Map C-s to save the file
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR><esc>
+noremap <silent> <C-s>          :update<CR>
+vnoremap <silent> <C-s>         <C-c>:update<CR>
+inoremap <silent> <C-s>         <C-o>mj<C-c>:update<CR>
 map <leader>pp :FZF<CR>
 map <C-l> :BLines<CR>
 map <C-tab> :Buffers<CR>
 map <C-g> :GitFiles<CR>
 map <Leader>t :BTags<CR>
-map <Leader>a :Ag <C-R><C-W><CR>
-map <Leader>/ /<C-R><C-W><CR>
+map <Leader>a :Ag <C-r><C-w><CR>
+map <Leader>/ /<C-r><C-w><CR>
 
 map <Leader>d :NERDTreeToggle<CR>
 map <Leader>dd :NERDTreeToggle<CR>:NERDTreeToggle<CR>
@@ -234,11 +239,6 @@ nmap <leader>ySs <Plug>YSsurround
 nmap <leader>ySS <Plug>YSSurround
 xmap <leader>s   <Plug>VSurround
 xmap <leader>gS  <Plug>VgSurround
-if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
-  imap    <C-S> <Plug>Isurround
-endif
-imap      <C-G>s <Plug>Isurround
-imap      <C-G>S <Plug>ISurround
 
 let g:fzf_action = {
       \ 'ctrl-j': 'tab split',
@@ -310,22 +310,20 @@ nmap <silent><leader>gb :Gblame<cr>
 
 " UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric//YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-l>"
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 let g:UltiSnipsEditSplit="vertical" " UltiSnipsEdit to split your window.
 
 " mini buffer display
-nmap <leader>b :MBEToggle<cr>
+" nmap <leader>b :MBEToggle<cr>
 
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
 
 " When the <Enter> key is pressed while the popup menu is visible, it only
 " hides the menu. Use this mapping to close the menu and also start a new
 " line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<cr>" : "\<CR>")
 
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -416,3 +414,30 @@ let g:vdebug_options = { 'server': '127.0.0.1', 'port': '9000' }
 " actionscript
 au BufNewFile,BufRead *.mxml set filetype=mxml
 au BufNewFile,BufRead *.as set filetype=actionscript
+
+function! s:start_delete(key)
+    let l:result = a:key
+    if !s:deleting
+        let l:result = "\<C-G>u".l:result
+    endif
+    let s:deleting = 1
+    return l:result
+endfunction
+
+function! s:check_undo_break(char)
+    if s:deleting
+        let s:deleting = 0
+        call feedkeys("\<BS>\<C-G>u".a:char, 'n')
+    endif
+endfunction
+
+augroup smartundo
+    autocmd!
+    autocmd InsertEnter * let s:deleting = 0
+    autocmd InsertCharPre * call s:check_undo_break(v:char)
+augroup END
+
+inoremap <expr> <BS> <SID>start_delete("\<BS>")
+inoremap <expr> <C-W> <SID>start_delete("\<C-W>")
+inoremap <expr> <C-U> <SID>start_delete("\<C-U>")
+
