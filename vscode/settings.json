@@ -1,0 +1,134 @@
+// Place your settings in this file to overwrite the default settings
+{
+  /* Editor */
+  "editor.fontSize": 17,
+  "editor.tabSize": 2,
+  // "editor.fontFamily": "'monospace', 'Courier New', monospace, 'Droid Sans Fallback'",
+  // "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Fira code Retina, monospace",
+  "editor.fontLigatures": true,
+  "editor.lineNumbers": "relative",
+  "editor.rulers": [100, 120],
+  "editor.tokenColorCustomizations": {
+    "[Cobalt2]": {
+      "variables": "#ff628c"
+    }
+  },
+  // "editor.lineHeight": 25,
+  // "editor.letterSpacing": 0.5,
+  "editor.fontWeight": "400",
+  "editor.cursorWidth": 4,
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  // "editor.renderWhitespace": "all",
+  "editor.wordWrapColumn": 120,
+  // "editor.gotoLocation.multiple": "gotoAndPeek",
+  "editor.cursorBlinking": "expand",
+  /* Window */
+  "window.zoomLevel": 1,
+  "window.menuBarVisibility": "visible",
+  "window.titleBarStyle": "custom",
+  /* Files */
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "off",
+  /* Path */
+  /* Emmet */
+  "emmet.syntaxProfiles": {
+    "javascript": "html, css, jsx"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html",
+    "plaintext": "jade"
+  },
+  /* Explorer */
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.visible": 0,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  /* Language */
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.fontLigatures": "'ss02', 'ss19'"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  /* Terminal */
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.rendererType": "dom",
+  /* Jest */
+  // stop running tests to improve performance.
+  "jest.autoEnable": false,
+  "jest.runAllTestsFirst": false,
+  "jest.showCoverageOnLoad": false,
+  /* Vim settings */
+  "vim.leader": "<space>",
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "line",
+  "vim.cursorStylePerMode.replace": "line",
+  "vim.cursorStylePerMode.visual": "line",
+  "vim.cursorStylePerMode.visualblock": "line",
+  "vim.cursorStylePerMode.visualline": "line",
+  "vim.useCtrlKeys": false,
+  "vim.useSystemClipboard": true,
+  "vim.overrideCopy": false,
+  "vim.easymotion": true,
+  "vim.sneak": true,
+  "vim.incsearch": true,
+  "vim.hlsearch": true,
+  "vim.handleKeys": {
+    "<C-d>": false
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["u"],
+      "commands": ["undo"]
+    },
+    {
+      "before": ["<C-r>"],
+      "commands": ["redo"]
+    }
+  ],
+  /* WorkBench settings */
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.panel.defaultLocation": "bottom",
+  "workbench.activityBar.visible": true,
+  "workbench.statusBar.visible": true,
+  /* Misc */
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "open-in-browser.default": "google-chrome",
+  "guides.enabled": false,
+  // "eslint.migration.2_x": "off",
+  "prettier.resolveGlobalModules": true,
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "bracketPairColorizer.showBracketsInGutter": true,
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe"
+}
