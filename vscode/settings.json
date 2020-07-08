@@ -1,11 +1,11 @@
 // Place your settings in this file to overwrite the default settings
 {
   /* Editor */
-  "editor.fontSize": 17,
+  "editor.fontSize": 13,
   "editor.tabSize": 2,
   // "editor.fontFamily": "'monospace', 'Courier New', monospace, 'Droid Sans Fallback'",
-  // "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontFamily": "Fira code Retina, monospace",
+  "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+  // "editor.fontFamily": "Fira code Retina, monospace",
   "editor.fontLigatures": true,
   "editor.lineNumbers": "relative",
   "editor.rulers": [100, 120],
@@ -30,7 +30,7 @@
   "window.titleBarStyle": "custom",
   /* Files */
   "files.trimTrailingWhitespace": true,
-  "files.autoSave": "off",
+  "files.autoSave": "onFocusChange",
   /* Path */
   /* Emmet */
   "emmet.syntaxProfiles": {
@@ -130,5 +130,10 @@
     "typescriptreact"
   ],
   "bracketPairColorizer.showBracketsInGutter": true,
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe"
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+  "files.exclude": {
+    "**/.idea": true
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
