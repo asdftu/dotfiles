@@ -27,8 +27,9 @@ $Insert::return
 ;LAlt & Tab::AltTab
 
 ; swap left command/windows key with left alt
-;Capslock::Alt
+Capslock::LCtrl
 ;LAlt::Ctrl
+
 ; add a semicolon in front of this line if you want to disable the windows key
 
 ; Remap Windows + Left OR Right to enable previous or next web page
@@ -42,60 +43,155 @@ $Insert::return
 ; --------------------------------------------------------------
 
 ; Close windows (cmd + q to Alt + F4)
-!q::Send !{F4}
+#q::Send !{F4}
 
 ; minimize windows
-!h::WinMinimize,a
+#h::WinMinimize,a
 
-![::Send !{Left}
-!]::Send !{Right}
-!a::Send ^a
-!b::Send ^b
-!c::Send ^c
-!d::Send ^d
-!e::Send ^e
-!f::Send ^f
-!g::Send ^g
+#[::Send !{Left}
+#]::Send !{Right}
+#a::Send ^a
++#a::Send +^a
 
-!i::Send ^i
-!j::Send ^j
-!k::Send ^k
-!l::Send ^l
-!m::Send ^m
-!n::Send ^n
-!o::Send ^o
-!p::Send ^p
+#b::Send ^b
++#b::Send +^b
 
-!r::Send ^r
-!s::Send ^s
-!t::Send ^t
-+!t::Send +^t
-!u::Send ^u
-!v::Send ^v
-!w::Send ^w
-!x::Send ^x
-!y::Send ^y
-!z::Send ^z
+#c::Send ^c
++#c::Send +^c
 
-LAlt & LButton::Send {Ctrl Down}{LButton}{Ctrl Up}
+#d::Send ^d
++#d::Send +^d
 
-!Right::
+#e::Send ^e
++#e::Send +^e
+
+#f::Send ^f
++#f::Send +^f
+
+#g::Send ^g
++#g::Send +^g
+
+#i::Send ^i
++#i::Send +^i
+
+#j::Send ^j
++#j::Send +^j
+
+#k::Send ^k
++#k::Send +^k
+
+#l::Send ^l
++#l::Send +^l
+
+#m::Send ^m
++#m::Send +^m
+
+#n::Send ^n
++#n::Send +^n
+
+#o::Send ^o
++#o::Send +^o
+
+#p::Send ^p
++#p::Send +^p
+
+#r::Send ^r
++#r::Send +^r
+
+#s::Send ^s
++#s::Send +^s
+
+#t::Send ^t
++#t::Send +^t
+#u::Send ^u
++#u::Send +^u
+
+#v::Send ^v
++#v::Send +^v
+#w::Send ^w
++#w::Send +^w
+#x::Send ^x
++#x::Send +^x
+#y::Send ^y
++#y::Send +^y
+#z::Send ^z
++#z::Send +^z
+
+#,::send ^,
+#.::send ^.
+#/::send ^/
+#-::send ^-
+#=::send ^=
+#`::send ^`
+
+#1::^1
+#2::^2
+#3::^3
+#4::^4
+#5::^5
+#6::^6
+#7::^7
+#8::^8
+#9::^9
+#0::^0
+#+1::^+1
+#+2::^+2
+#+3::^+3
+#+4::^+4
+#+5::^+5
+#+6::^+6
+#+7::^+7
+#+8::^+8
+#+9::^+9
+#+0::^+0
+#+,::Send {LCtrl down}{LShift down}{,}{LShift up}{LCtrl up}
+#+.::^+.
+
+
+#Right::
 Send {End}
 return
 
-*!Right:: ; This handles Shift-Right
+*#Right:: ; This handles Shift-Right
 Send {Blind}{LAlt Up}{End}
 return
 
-!Left::
+#Left::
 Send {Home}
 return
 
-*!Left:: ; This handles Shift-Left
+*#Left:: ; This handles Shift-Left
 Send {Blind}{Alt Up}{Home}
 return
 
+; --------------------------------------------------------------
+; Windows specific
+; --------------------------------------------------------------
+LWIN & Tab::AltTab
+LWIN & LButton::Send {Ctrl Down}{LButton}{Ctrl Up}
 
+!p::Send #p
+!r::Send #r
+!e::Send #e
+!x::Send #x
+RAlt::Del
+
+;~LWin Up:: return
+#Space::Send !{Space}
+
+
+
+; --------------------------------------------------------------
+; Application specific
+; --------------------------------------------------------------
+
++#'::
+
+WinGetClass, Var ,A
+
+MsgBox ahk_class "%Var%"
+
+Return
 
 ; --------------------------------------------------------------
 ; Application specific
@@ -112,20 +208,17 @@ return
 
 #IfWinActive
 
-; We Chat
+; applications cmd + w close window
 #IfWinActive, ahk_class WeChatMainWndForPC
+#w::Send !{F4}
+#IfWinActive
 
-; Show Web Developer Tools with cmd + alt + i
-!w::Send !{F4}
-
-
+#IfWinActive, ahk_class TFoxMainFrm.UnicodeClass
+#w::Send !{F4}
 #IfWinActive
 
 ; console
 #IfWinActive, ahk_class ConsoleWindowClass
-
-!w::WinClose, ahk_class ConsoleWindowClass
-
-
+#w::WinClose, ahk_class ConsoleWindowClass
 #IfWinActive
 
