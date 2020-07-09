@@ -179,6 +179,19 @@ RAlt::Del
 ;~LWin Up:: return
 #Space::Send !{Space}
 
+LWIN::
+if (A_PriorHotkey != "LWIN" or A_TimeSincePriorHotkey > 400)
+{
+    ; 两次按下时间间隔太长, 所以这不是一个两次按下.
+	;MsgBox You pressed win key large than 400 ms.
+	;Send c
+    KeyWait, LWIN
+    return
+}
+;MsgBox You pressed win key less than 400 ms.
+;KeyWait, LWIN
+Send {LWIN}
+return
 
 
 ; --------------------------------------------------------------
