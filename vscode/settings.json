@@ -1,7 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
   /* Editor */
-  "editor.fontSize": 13,
+  "editor.fontSize": 14,
   "editor.tabSize": 2,
   // "editor.fontFamily": "'monospace', 'Courier New', monospace, 'Droid Sans Fallback'",
   "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
@@ -130,7 +130,7 @@
     "typescriptreact"
   ],
   "bracketPairColorizer.showBracketsInGutter": true,
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "files.exclude": {
     "**/.idea": true
   },
