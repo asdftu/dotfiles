@@ -7,7 +7,7 @@
   "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
   // "editor.fontFamily": "Fira code Retina, monospace",
   "editor.fontLigatures": true,
-  "editor.lineNumbers": "relative",
+  // "editor.lineNumbers": "relative",
   "editor.rulers": [100, 120],
   "editor.tokenColorCustomizations": {
     "[Cobalt2]": {
@@ -19,7 +19,7 @@
   "editor.fontWeight": "400",
   "editor.cursorWidth": 4,
   "editor.minimap.enabled": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   // "editor.renderWhitespace": "all",
   "editor.wordWrapColumn": 120,
   // "editor.gotoLocation.multiple": "gotoAndPeek",
@@ -82,12 +82,12 @@
   "jest.showCoverageOnLoad": false,
   /* Vim settings */
   "vim.leader": "<space>",
-  "vim.cursorStylePerMode.insert": "line",
-  "vim.cursorStylePerMode.normal": "line",
-  "vim.cursorStylePerMode.replace": "line",
-  "vim.cursorStylePerMode.visual": "line",
-  "vim.cursorStylePerMode.visualblock": "line",
-  "vim.cursorStylePerMode.visualline": "line",
+  // "vim.cursorStylePerMode.insert": "line",
+  // "vim.cursorStylePerMode.normal": "line",
+  // "vim.cursorStylePerMode.replace": "line",
+  // "vim.cursorStylePerMode.visual": "line",
+  // "vim.cursorStylePerMode.visualblock": "line",
+  // "vim.cursorStylePerMode.visualline": "line",
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
   "vim.overrideCopy": false,
@@ -132,8 +132,9 @@
   "bracketPairColorizer.showBracketsInGutter": true,
   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "files.exclude": {
-    "**/.idea": true
+    "**/.idea": true,
+    "**/node_modules": true
   },
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }
