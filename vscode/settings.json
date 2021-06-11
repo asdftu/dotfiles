@@ -2,7 +2,7 @@
 {
   /* Editor */
   "editor.fontSize": 14,
-  "editor.tabSize": 2,
+  "editor.tabSize": 8,
   // "editor.fontFamily": "'monospace', 'Courier New', monospace, 'Droid Sans Fallback'",
   "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
   // "editor.fontFamily": "Fira code Retina, monospace",
@@ -88,7 +88,7 @@
   // "vim.cursorStylePerMode.visual": "line",
   // "vim.cursorStylePerMode.visualblock": "line",
   // "vim.cursorStylePerMode.visualline": "line",
-  "vim.useCtrlKeys": false,
+  "vim.useCtrlKeys": true,
   "vim.useSystemClipboard": true,
   "vim.overrideCopy": false,
   "vim.easymotion": true,
@@ -96,7 +96,13 @@
   "vim.incsearch": true,
   "vim.hlsearch": true,
   "vim.handleKeys": {
-    "<C-d>": false
+    "<C-d>": false,
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-e>": false,
+    "<C-w>": false,
+    "<C-f>": false
   },
   "vim.normalModeKeyBindingsNonRecursive": [
     {
@@ -106,6 +112,16 @@
     {
       "before": ["<C-r>"],
       "commands": ["redo"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+        "before": ["<C-l>"],
+        "after": ["<C-w>", "l"]
+    },
+    {
+        "before": ["<C-h>"],
+        "after": ["<C-w>", "h"]
     }
   ],
   /* WorkBench settings */
@@ -130,11 +146,49 @@
     "typescriptreact"
   ],
   "bracketPairColorizer.showBracketsInGutter": true,
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+  // "terminal.integrated.shell.windows": "C:\\Users\\Logan\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
   "files.exclude": {
     "**/.idea": true,
     "**/node_modules": true
   },
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "debug.node.autoAttach": "off",
+  "debug.allowBreakpointsEverywhere": true,
+  "debug.console.closeOnEnd": true,
+  "debug.toolBarLocation": "docked",
+  "git.autofetch": true,
+  "go.useLanguageServer": true,
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "php-cs-fixer.lastDownload": 1611021810866,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "cmake.configureOnOpen": false,
+  "debug.javascript.autoAttachFilter": "smart",
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "tabnine.experimentalAutoImports": true,
+  "thiefBook.filePath": "C:\\\\Users\\\\Logan\\\\Downloads\\\\xianni\\\\xianni.txt",
+  "thiefBook.pageSize": 99,
+  "thiefBook.lineBreak": "",
+  "thiefBook.currPageNumber": 7,
+  "plantuml.render": "PlantUMLServer",
+  "plantuml.server": "http://172.16.0.34:8080",
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off"
 }
